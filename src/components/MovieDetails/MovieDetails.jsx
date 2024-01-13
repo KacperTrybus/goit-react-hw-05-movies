@@ -7,14 +7,16 @@ import {
 } from 'components/api';
 import { useParams } from 'react-router-dom';
 import MoviePage from 'components/MoviePage/MoviePage';
+import Cast from 'components/Cast/Cast';
+// import Reviews from 'components/Reviews/Reviews';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const [cast, setCast] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const [showCastInfo, setShowCastInfo] = useState(false);
-  const [showReviewsInfo, setShowReviewsInfo] = useState(false);
+  // const [showCastInfo, setShowCastInfo] = useState(false);
+  // const [showReviewsInfo, setShowReviewsInfo] = useState(false);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -31,13 +33,14 @@ const MovieDetails = () => {
     fetchMovieDetails();
   }, [movieId]);
 
-  const handleToggleCastInfo = () => {
-    setShowCastInfo(!showCastInfo);
-  };
+  // const handleToggleCastInfo = () => {
+  //   setShowCastInfo(!showCastInfo);
+  //   console.log('Toggle Cast Info');
+  // };
 
-  const handleToggleReviewsInfo = () => {
-    setShowReviewsInfo(!showReviewsInfo);
-  };
+  // const handleToggleReviewsInfo = () => {
+  //   setShowReviewsInfo(!showReviewsInfo);
+  // };
 
   return (
     <div>
@@ -46,14 +49,17 @@ const MovieDetails = () => {
           movieDetails={movieDetails}
           cast={cast}
           reviews={reviews}
-          showCast={showCastInfo}
-          showReviews={showReviewsInfo}
-          onToggleCastInfo={handleToggleCastInfo}
-          onToggleReviewsInfo={handleToggleReviewsInfo}
+          movieId={movieId}
+          // showCast={showCastInfo}
+          // showReviews={showReviewsInfo}
+          // onToggleCastInfo={handleToggleCastInfo}
+          // onToggleReviewsInfo={handleToggleReviewsInfo}
         />
       ) : (
         <p>Loading...</p>
       )}
+      {/* <Cast movieId={movieId} /> */}
+      {/* <Reviews movieId={movieId} /> */}
     </div>
   );
 };

@@ -7,8 +7,14 @@ const Cast = ({ movieId }) => {
 
   useEffect(() => {
     const fetchCast = async () => {
-      const { cast } = await getMovieCredits(movieId);
-      setCast(cast);
+      try {
+        if (movieId) {
+          const { cast } = await getMovieCredits(movieId);
+          setCast(cast);
+        }
+      } catch (error) {
+        console.error('Error fetching cast:', error);
+      }
     };
 
     fetchCast();
@@ -17,22 +23,26 @@ const Cast = ({ movieId }) => {
   return (
     <div>
       <h1>Cast</h1>
-      {cast.map(actor => (
-        <div key={actor.id}>
-          <img
-            src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
-            alt={actor.name}
-          />
-          <p>{actor.name}</p>
-          <p>Character: {actor.character}</p>
-        </div>
-      ))}
+      {cast.length > 0 ? (
+        cast.map(actor => (
+          <div key={actor.id}>
+            <img
+              src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+              alt={actor.name}
+            />
+            <p>{actor.name}</p>
+            <p>Character: {actor.character}</p>
+          </div>
+        ))
+      ) : (
+        <p>No cast information available for this movie.</p>
+      )}
     </div>
   );
 };
 
-Cast.propTypes = {
-  movieId: PropTypes.number.isRequired,
-};
+// Cast.propTypes = {
+//   movieId: PropTypes.string.isRequired,
+// };
 
 export default Cast;

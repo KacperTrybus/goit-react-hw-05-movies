@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
-import Cast from 'components/Cast/Cast';
-import Reviews from 'components/Reviews/Reviews';
-import { useNavigate } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
+// import Cast from 'components/Cast/Cast';
 
 const MoviePage = ({
   movieDetails,
@@ -12,17 +11,6 @@ const MoviePage = ({
   onToggleCastInfo,
   onToggleReviewsInfo,
 }) => {
-  const navigate = useNavigate();
-  const handleShowCast = () => {
-    onToggleCastInfo();
-    navigate(`cast`);
-  };
-
-  const handleShowReviews = () => {
-    onToggleReviewsInfo();
-    navigate(`reviews`);
-  };
-
   return (
     <div>
       <h1>{movieDetails.title}</h1>
@@ -36,29 +24,28 @@ const MoviePage = ({
 
       <h2>Additional Information</h2>
 
-      <div>
-        <button onClick={handleShowCast}>Show Cast</button>
-        {showCast && <Cast movieId={movieDetails.id} cast={cast} />}{' '}
-      </div>
+      <ul>
+        <li>
+          <Link
+            to="cast"
+            // onClick={onToggleCastInfo}
+          >
+            Show Cast
+          </Link>
+        </li>
 
-      <div>
-        <button onClick={handleShowReviews}>Show Reviews</button>
-        {showReviews && (
-          <Reviews movieId={movieDetails.id} reviews={reviews} />
-        )}{' '}
-      </div>
+        <li>
+          <Link to="reviews">Show Reviews</Link>
+        </li>
+      </ul>
+      {/* {showCast && <Cast movieId={movieDetails.id} />} */}
+      <Outlet />
     </div>
   );
 };
 
 MoviePage.propTypes = {
   movieDetails: PropTypes.object.isRequired,
-  cast: PropTypes.array.isRequired,
-  reviews: PropTypes.array.isRequired,
-  showCast: PropTypes.bool.isRequired,
-  showReviews: PropTypes.bool.isRequired,
-  onToggleCastInfo: PropTypes.func.isRequired,
-  onToggleReviewsInfo: PropTypes.func.isRequired,
 };
 
 export default MoviePage;
