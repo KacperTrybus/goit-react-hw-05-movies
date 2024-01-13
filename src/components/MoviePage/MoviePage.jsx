@@ -1,16 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link, Outlet } from 'react-router-dom';
-// import Cast from 'components/Cast/Cast';
 
-const MoviePage = ({
-  movieDetails,
-  cast,
-  reviews,
-  showCast,
-  showReviews,
-  onToggleCastInfo,
-  onToggleReviewsInfo,
-}) => {
+const MoviePage = ({ movieDetails }) => {
   return (
     <div>
       <h1>{movieDetails.title}</h1>
@@ -26,19 +17,13 @@ const MoviePage = ({
 
       <ul>
         <li>
-          <Link
-            to="cast"
-            // onClick={onToggleCastInfo}
-          >
-            Show Cast
-          </Link>
+          <Link to="cast">Show Cast</Link>
         </li>
 
         <li>
           <Link to="reviews">Show Reviews</Link>
         </li>
       </ul>
-      {/* {showCast && <Cast movieId={movieDetails.id} />} */}
       <Outlet />
     </div>
   );

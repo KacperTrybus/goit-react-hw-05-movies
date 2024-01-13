@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getMovieCredits } from 'components/api';
-import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 
-const Cast = ({ movieId }) => {
+const Cast = () => {
+  const { movieId } = useParams();
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
@@ -40,9 +41,5 @@ const Cast = ({ movieId }) => {
     </div>
   );
 };
-
-// Cast.propTypes = {
-//   movieId: PropTypes.string.isRequired,
-// };
 
 export default Cast;
