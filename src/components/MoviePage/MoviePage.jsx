@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
-import { Link, Outlet } from 'react-router-dom';
+import { useNavigate, Link, Outlet } from 'react-router-dom';
 
 const MoviePage = ({ movieDetails }) => {
+  const navigate = useNavigate();
   return (
     <div>
+      <button onClick={() => navigate(-1)}>go back</button>
       <h1>{movieDetails.title}</h1>
       <img
         src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
